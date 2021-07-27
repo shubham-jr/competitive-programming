@@ -1,0 +1,34 @@
+continue statment in for loop update iteration
+int -10^9 to 10^9
+long int -10^12 to 10^12
+long long int -10^18 to 10^18
+we cannot give size to set stl we can only use insert and find on it.
+in pair we use make_pair to initialize pair
+initializing any stl with same thing use "vector<pii>v(10,{1,2});" here in () give as 2nd argument....
+if you donot give the size then the bounded for(:) loop doen't work because size is 0;
+if you sort vector<pii> then it is sorted a/q to the first element if you want to sort a/q to second then use driver fn
+also if you use sort in v<pii> and if the first element are same then it would use second element to sort
+third parameter in sort is comparator function.(what you want to get return that)...
+set<int> s(v.begin(), v.end()); copy vector into set //same as in miltiset
+ends.erase(ends.begin())
+insertion of map insert({key,value})
+if you use pb then in vector always you got zer0 {0,1,....} if you have set the size of vector(n)
+if you not set set the size of vector then use push_back not v[i] in for loop because loop not work
+memset function is used to initialize varibale size objects and must be sequential and we can only initialize 0 ||-1;
+problems-- int arr[9]={5}; wrong this luckily only work for {0};
+problem int arr[n]={2} cannot initialize variable sized array
+memset syntax memset(arr,-1or0,sizeof(arr)); h file cstring
+sigsegv segmentation fault occur when you want to access out of limit(bound)
+SIGABRT is commonly used by libc and other libraries to abort the program in case of critical errors. 
+--For example, glibc sends an SIGABRT in case of a detected double-free or other heap corruptions.
+--SIGABRT errors are caused by your program aborting due to a fatal error.
+-- In C++, this is normally due to an assert statement in C++ not returning true, but some STL elements can generate this if they try to store too much memory.
+default value of map before initialization is 0;m[1] gives 0;
+if you want to initialize map using random value you can use (gfg link (https://www.geeksforgeeks.org/default-values-in-a-map-in-c-stl/))---
+---make a class/structure then specify value like int i=-1; then in map map[1].i gives -1 
+set cannot be assingned by push back only use insert
+vector not have push_front
+you can use list if you want to push back/front etc because it just like double ended linked list
+you cannot use list like l[0] no never because it is linked list
+always use correct brackets in case of getting value from iterator (*(s.begin())).ff
+maximum all cpp stl containers have begin() and end()

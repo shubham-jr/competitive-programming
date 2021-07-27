@@ -1,0 +1,20 @@
+if you use dublicate keys in maps then it is overwrite and takes the last one  
+to iterate on map you can use for(auto [key,value]:um) but in cpp17
+want to count total no of elements in a set use count()
+memset(&v[0],0,v.size()); we cannot use memset on bool
+can use static in any stl container
+use clear to clear stl containers not empty beause using clear it will gone through memory
+set not have updation (delete it  and insert new) but map have
+you can use ff ans ss in map
+make a vector and gives all value to infinity vector<int>distance(n,INT_MAX);
+queue has front and back() which gives value not address and also begin and end not work here
+vector has begin()  and end() which gives the address so use *v.begin()
+You cant use Floyd Warshall with adjacency list because when it works, it makes new edges.
+in any question if you want to need of priority queue then use set/multiset there
+pass stl as reference vector<int>&parent
+q.front()does not return iterator rather than begin() or end()
+if you want to traverse through whole vertex rather than connecting vertex don;t use adjacenecy list use class node
+if you want to store large data like 10^100 then store it in string
+floor(gif) ceil(sif)
+if your code time complexity is >10^7 then time will be more than 1s
+to find 2^power use (1<<3 = 1*pow(2,3)) left shift
