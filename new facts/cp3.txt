@@ -1,0 +1,2 @@
+Never pass conatiners/objects(array,vectors) as copy(call by value) if not necessary.
+use 4*n size of segment tree always.Otherwise for large constraints it gives run time error

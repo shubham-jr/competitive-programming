@@ -43,8 +43,8 @@ template<class T>void vprint(list<T>l){cerr<<"[";for(auto i:l){vprint(i);cerr<<"
 template<class T,class P>void vprint(list<pair<T,P>>l){cerr<<"[";for(auto i:l)vprint(i);cerr<<"]";}
 template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m)vprint(i);cerr<<"]";}
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
-vector<int>segment(15);
-void built(vector<int>v,int i,int low,int high)
+vector<int>segment;
+void built(vector<int>&v,int i,int low,int high)
 {
   if(low==high)
   {
@@ -73,7 +73,7 @@ void pointUpdate(vector<int>&v,int i,int low,int high,int vindex,int val)
     segment[i]=min(segment[2*i+1],segment[2*i+2]);
 }
 
-int query(vector<int>v,int i,int low,int high,int l,int h)
+int query(vector<int>&v,int i,int low,int high,int l,int h)
 {
   if(l<=low&&h>=high)
     return segment[i];
@@ -90,6 +90,7 @@ void solve()
   int n;
   cin>>n;
   vector<int>v(n);
+  segment.resize(4*n);
   fo(0,n)
   cin>>v[i];
   built(v,0,0,n-1);
