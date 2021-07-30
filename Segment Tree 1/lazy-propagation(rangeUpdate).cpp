@@ -9,6 +9,7 @@ using namespace std;
 #define pb push_back
 #define popb pop_back
 #define mp make_pair
+#define rz resize
 #define all(v) v.begin(), v.end()
 #define fo(x,y) for(int i=x;i<y;i++)
 #define pii pair<int,int>
@@ -43,8 +44,7 @@ template<class T>void vprint(list<T>l){cerr<<"[";for(auto i:l){vprint(i);cerr<<"
 template<class T,class P>void vprint(list<pair<T,P>>l){cerr<<"[";for(auto i:l)vprint(i);cerr<<"]";}
 template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m)vprint(i);cerr<<"]";}
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
-vector<int>segment;
-vector<int>lazy(15);
+vector<int>segment,lazy;
 void built(vector<int>&v,int i,int low,int high)
 {
   if(low==high)
@@ -52,7 +52,7 @@ void built(vector<int>&v,int i,int low,int high)
     segment[i]=v[low];
     return;
   }
-  int mid=high+low>>1;
+  int mid=low+high>>1;
   built(v,2*i+1,low,mid);
   built(v,2*i+2,mid+1,high);
   segment[i]=segment[2*i+1]+segment[2*i+2];
@@ -60,67 +60,62 @@ void built(vector<int>&v,int i,int low,int high)
 
 int query(int i,int low,int high,int l,int h)
 {
-  if(lazy[i]!=0)
-  {
-    segment[i]+=(high-low+1)*lazy[i];
-    if(low=!high)
-    {
-      lazy[2*i+1]+=lazy[i];
-      lazy[2*i+2]+=lazy[i];
-    }
-    lazy[i]=0;
-  }
-  if(l<=low&&high<=h)
+  if(low>=l&&high<=h)
     return segment[i];
-  if(low>h||high<l)
+  if(high<l||h<low)
     return 0;
-  int mid=high+low>>1;
-  return query(2*i+1,low,mid,l,h)+query(2*i+2,mid+1,high,l,h);
+  int mid=low+high>>1;
+  int left=query(2*i+1,low,mid,l,h);
+  int right=query(2*i+2,mid+1,high,l,h);
+  return left+right;
 }
 
-void rangeUpdate(int i,int low,int high,int l,int h,int val)
+void lazy_propagration(int i,int low,int high,int l,int h,int val)
 {
   if(lazy[i]!=0)
   {
-    segment[i]+=lazy[i]*(high-low+1);
+    segment[i]+=(high-low+1)*lazy[i];
     if(low!=high)
     lazy[2*i+1]+=lazy[i],lazy[2*i+2]+=lazy[i];
     lazy[i]=0;
   }
-  if(low>=l&&high<=h)
+  if(l<=low&&high<=h)
   {
-    segment[i]+=val*(high-low+1);
+    segment[i]+=(high-low+1)*val;
     if(low!=high)
-    lazy[2*i+1]+=val,lazy[2*i+2]+=val;
-    return;
+      lazy[2*i+1]+=val,lazy[2*i+2]+=val; 
+    return; 
   }
-  if(low>h||high<l)
+  if(high<l||low>h)
     return;
-  int mid=high+low>>1;
-  rangeUpdate(2*i+1,low,mid,l,h,val);
-  rangeUpdate(2*i+2,mid+1,high,l,h,val);
+  int mid=low+high>>1;
+  lazy_propagration(2*i+1,low,mid,l,h,val);
+  lazy_propagration(2*i+2,mid+1,high,l,h,val);
   segment[i]=segment[2*i+1]+segment[2*i+2];
 }
 
 void solve()
 {
-  int n;cin>>n;
+  int n;
+  cin>>n;
+  segment.rz(4*n);
+  lazy.rz(4*n);
   vector<int>v(n);
-  segment.resize(4*n);
   fo(0,n)
   cin>>v[i];
   built(v,0,0,n-1);
   debug(segment);
-  int q,update_l,update_r,l,r,val;
-  cin>>q>>update_l>>update_r>>val;
-  rangeUpdate(0,0,n-1,update_l,update_r,val);
-  debug(segment);
   debug(lazy);
+  int q,l,r,update_l,update_r,val;
+  cin>>q>>update_l>>update_r>>val;
+  lazy_propagration(0,0,n-1,update_l,update_r,val);
+  debug(segment);
   while(q--)
-  {
+  {  
     cin>>l>>r;
-    cout<<query(0,0,n-1,l,r)<<nline;
+    cout<<query(0,0,n-1,l,r)<<endl;
   }
+  debug(lazy);
 }
 
 int main() 
@@ -132,3 +127,16 @@ int main()
   solve();
   return 0;
 }
+/*
+Input
+6
+1 2 3 4 5 6
+3 3 5 10
+2 5
+1 2
+3 4
+Output
+48
+5
+9
+*/

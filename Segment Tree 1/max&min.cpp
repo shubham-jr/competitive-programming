@@ -97,3 +97,16 @@ int main()
   solve();
   return 0;
 }
+/*
+Input
+6
+1 2 3 4 5 6
+3 
+2 5
+1 2
+3 4
+Output
+6
+3
+5
+*/

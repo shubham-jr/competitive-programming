@@ -9,6 +9,7 @@ using namespace std;
 #define pb push_back
 #define popb pop_back
 #define mp make_pair
+#define rz resize
 #define all(v) v.begin(), v.end()
 #define fo(x,y) for(int i=x;i<y;i++)
 #define pii pair<int,int>
@@ -44,6 +45,7 @@ template<class T,class P>void vprint(list<pair<T,P>>l){cerr<<"[";for(auto i:l)vp
 template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m)vprint(i);cerr<<"]";}
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
 vector<int>segment;
+
 void built(vector<int>&v,int i,int low,int high)
 {
   if(low==high)
@@ -51,40 +53,40 @@ void built(vector<int>&v,int i,int low,int high)
     segment[i]=v[low];
     return;
   }
-  int mid=(low+high)/2;
+  int mid=low+high>>1;
   built(v,2*i+1,low,mid);
   built(v,2*i+2,mid+1,high);
   segment[i]=segment[2*i+1]+segment[2*i+2];
 }
 
-int query(vector<int>&v,int i,int low,int high,int l,int h)
+int query(int i,int low,int high,int l,int h)
 {
-  if(l<=low&&h>=high)
+  if(low>=l&&high<=h)
     return segment[i];
-  if(high<l||low>h)
+  if(high<l||h<low)
     return 0;
-  int mid=(low+high)/2;
-  int left=query(v,2*i+1,low,mid,l,h);
-  int right=query(v,2*i+2,mid+1,high,l,h);
+  int mid=low+high>>1;
+  int left=query(2*i+1,low,mid,l,h);
+  int right=query(2*i+2,mid+1,high,l,h);
   return left+right;
 }
 
 void solve()
 {
-  int n;cin>>n;
+  int n;
+  cin>>n;
+  segment.rz(4*n);
   vector<int>v(n);
-  segment.resize(4*n);
-  fo(0,n) 
+  fo(0,n)
   cin>>v[i];
   built(v,0,0,n-1);
-  debug(v);
   debug(segment);
   int q,l,r;
   cin>>q;
   while(q--)
   {
     cin>>l>>r;
-    cout<<query(v,0,0,n-1,l,r)<<endl;
+    cout<<query(0,0,n-1,l,r)<<endl;
   }
 }
 
@@ -96,4 +98,17 @@ int main()
   fastio();  
   solve();
   return 0;
-}
+} 
+/*
+Input
+6
+1 2 3 4 5 6
+3 
+2 5
+1 2
+3 4
+Output
+18
+5
+9
+*/
