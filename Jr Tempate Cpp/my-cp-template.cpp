@@ -5,10 +5,12 @@ using namespace std;
 #define ss second
 #define PI 3.141592653589793238462
 #define INF 1e18
+#define mod 1000000007
 #define nline "\n"
 #define pb push_back
 #define popb pop_back
 #define mp make_pair
+#define rz resize
 #define all(v) v.begin(), v.end()
 #define fo(x,y) for(int i=x;i<y;i++)
 #define pii pair<int,int>

@@ -1,2 +1,6 @@
 Never pass conatiners/objects(array,vectors) as copy(call by value) if not necessary.
-use 4*n size of segment tree always.Otherwise for large constraints it gives run time error
+vector of size 4*n if using segment tree in recursive manner if iterative then 2*n
+How to use template in classes https://www.geeksforgeeks.org/templates-cpp/
+if you have to find min&max try using binary search 
+The largest integer data type in C/C++ is unsigned long long int which is of 64 bit and can handle integer from 0 to (2^64 – 1)
+% only work on integers and sqrt,^ gives double 
