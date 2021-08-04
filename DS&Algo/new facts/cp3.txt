@@ -5,3 +5,5 @@ if you have to find min&max try using binary search
 The largest integer data type in C/C++ is unsigned long long int which is of 64 bit and can handle integer from 0 to (2^64 – 1)
 % only work on integers and sqrt,^ gives double 
 int dp problem first solve it by recursion then memoization then use iteration with tabulation
+stack size is 1mb in windows
+recursion takes stack size of logn not n
