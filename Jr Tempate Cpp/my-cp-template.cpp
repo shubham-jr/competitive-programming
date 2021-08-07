@@ -13,6 +13,8 @@ using namespace std;
 #define rz resize
 #define all(v) v.begin(), v.end()
 #define fo(x,y) for(int i=x;i<y;i++)
+#define fo1(x,y) for(int i=x;i<y;i++)
+#define fo2(x,y) for(int j=x;j<y;j++)
 #define pii pair<int,int>
 #define tc int t;cin>>t;while(t--)
 #ifndef ONLINE_JUDGE
