@@ -47,11 +47,70 @@ template<class T>void vprint(list<T>l){cerr<<"[";for(auto i:l){vprint(i);cerr<<"
 template<class T,class P>void vprint(list<pair<T,P>>l){cerr<<"[";for(auto i:l)vprint(i);cerr<<"]";}
 template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m)vprint(i);cerr<<"]";}
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
-template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
+
+void merging(vector<int>&v,vector<int>&tmp,int l,int mid,int h)
+{
+  int i=l;
+  int j=mid+1;
+  int k=l;
+  while(i<=mid&&j<=h) 
+  {
+    if(v[i]<v[j]) 
+    {
+      tmp[k]=v[i];
+      i++;k++;
+    }
+    else{
+       tmp[k]=v[j];
+       j++;k++;
+    }
+  }
+  for(;i<=mid;i++)
+  {
+    tmp[k]=v[i];
+    k++;
+  }
+  for(;j<=h;j++)
+  {
+    tmp[k]=v[j];
+    k++;
+  }
+  fo(l,h+1)
+  {
+    v[i]=tmp[i];
+  }
+  fo(l,h+1)
+  v[i]=tmp[i];
+}
+
+void mergeSort(vector<int>&v,int n)
+{
+  vector<int>tmp(n);
+  int p,l,h,mid;
+  for(p=2;p<=n;p*=2)
+  {
+    for(int i=0;i+p-1<n;i+=p)
+    { 
+      l=i;
+      h=i+p-1;
+      mid=l+h>>1;
+      merging(v,tmp,l,mid,h); 
+    }
+    if(h<n-1)
+    merging(v,tmp,l,h,n-1);
+  }
+}
 
 void solve()
 {
-  
+  int n;
+  cin>>n;
+  vector<int>v(n);
+  fo(0,n)
+  cin>>v[i];
+  mergeSort(v,n);
+  fo(0,n)
+  cout<<v[i]<<" ";
 }
 
 int main() 

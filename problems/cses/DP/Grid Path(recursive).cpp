@@ -49,9 +49,35 @@ template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
 template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 
+int ways(vector<vector<char>>&v,vector<vector<int>>&dp,int i,int j)
+{
+  int n=v.size();   
+  if(i==n-1&&j==n-1)
+  return 1;  
+  if(i>=n||j>=n)
+  return 0;  
+  if(v[i][j]=='*')
+  return 0;
+  if(dp[i][j]!=-1)
+  return dp[i][j];  
+  return dp[i][j]=(ways(v,dp,i+1,j)+ways(v,dp,i,j+1))%mod;
+}
+
 void solve()
 {
-  
+  int n;
+  cin>>n;
+  vector<vector<char>>v(n,vector<char>(n));
+  vector<vector<int>>dp(n,vector<int>(n,-1));
+  fo1(0,n)
+  fo2(0,n)
+  cin>>v[i][j];
+  debug(v);
+  if(v[n-1][n-1]!='*')
+  cout<<ways(v,dp,0,0);
+  else
+  cout<<"0"<<endl;
+  debug(dp);
 }
 
 int main() 

@@ -49,9 +49,41 @@ template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
 template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 
+int partition(vector<int>&v,int l,int h)
+{ 
+    int pivot=v[l];
+    int i=l;
+    int j=h;
+  do{ 
+    do{i++;}while(v[i]<=pivot);
+    do{j--;}while(v[j]>pivot);
+    if(i<j)swap(v[i],v[j]);  
+  }while(i<j);
+  swap(&v[l],&v[j]);  
+   return j; 
+}
+
+void quickSort(vector<int>&v,int l,int h)
+{
+   if(l<h)
+   {
+    int br=partition(v,l,h);
+    quickSort(v,l,br);
+    quickSort(v,br+1,h);
+   } 
+}
+
 void solve()
 {
-  
+  int n;
+  cin>>n;  
+  vector<int>v(n+1);
+  fo(0,n)
+  cin>>v[i];
+  v[n]=INT_MAX;
+  quickSort(v,0,n);
+  fo(0,n)
+  cout<<v[i]<<" ";
 }
 
 int main() 

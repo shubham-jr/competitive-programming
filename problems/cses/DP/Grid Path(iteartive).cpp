@@ -49,9 +49,50 @@ template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
 template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 
+int ways(vector<vector<char>>&v,vector<vector<int>>&dp)
+{
+  int n=v.size();  
+  for(int i=n-1;i>=0;i--)
+  for(int j=n-1;j>=0;j--)
+  {
+    debug(dp);
+    debug2(i,j);
+    if(i==n-1&&j==n-1)
+    dp[i][j]=1;
+    else    
+    {
+        if(v[i][j]=='*')
+        dp[i][j]=0;
+        else
+        {
+            int bottom=(j+1>=n)?0:dp[i][j+1];
+            int right=(i+1>=n)?0:dp[i+1][j];
+            dp[i][j]=(bottom+right)%mod; 
+        }   
+    }
+  }
+  return dp[0][0];
+}
+
 void solve()
 {
-  
+  int n;
+  cin>>n;
+  vector<vector<char>>v(n,vector<char>(n));
+  vector<vector<int>>dp(n,vector<int>(n));
+  fo1(0,n)
+  fo2(0,n)
+  cin>>v[i][j];
+  debug(v);
+  fo1(0,n)
+  fo2(0,n)
+  if(v[n-1][n-1]=='*')
+  {
+    cout<<"0";
+    return;
+  }  
+  cout<<ways(v,dp);
+  debug(dp);
 }
 
 int main() 
