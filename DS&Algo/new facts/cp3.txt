@@ -8,3 +8,5 @@ int dp problem first solve it by recursion then memoization then use iteration w
 stack size is 1mb in windows
 recursion takes stack size of logn not n
 initialize 2d vector vector<vector<int>>dp(x+1,vector<int>(n+1,-1));
+vector<vector<int> > *varVect;
+ //this is the vector pointer that need to hold the other vectors
