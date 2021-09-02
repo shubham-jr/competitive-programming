@@ -49,43 +49,32 @@ template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
 template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 
+ll maxScore(vector<ll>&v,ll i,ll j,vector<vector<ll>>&dp)
+{
+  if(i>j)
+  return 0;
+  if(dp[i][j]!=-1)
+  return dp[i][j];   
+  ll choice1=v[i]+maxScore(v,i+2,j,dp);
+  ll choice2=v[i]+maxScore(v,i+1,j-1,dp);
+  ll choice3=v[j]+maxScore(v,i+1,j-1,dp);
+  ll choice4=v[j]+maxScore(v,i,j-2,dp);
+  ll a=min(choice1,choice2);
+  ll b=min(choice3,choice4);
+  ll ans=max(a,b);
+  return dp[i][j]=ans;
+
+}
+
 void solve()
 {
   ll n;
-
-  cin>>n; 
-
+  cin>>n;
   vector<ll>v(n);
-
   fo(0,n)
   cin>>v[i];
-
-  vector<vector<ll>>dp(n,vector<ll>(n));
-
-  for(int k=1;k<=n;k++)
-  for(int i=0;i+k<=n;i++)
-  {
-    ll j=i+k-1;
-
-    ll choice1=i+2<=j?dp[i+2][j]:0;
-
-    ll choice2=i+1<=j-1?dp[i+1][j-1]:0;
-
-    ll choice3=i<=j-2?dp[i][j-2]:0;
-
-    ll a=v[i]+min(choice1,choice2);
-
-    ll b=v[j]+min(choice2,choice3);
-
-    ll ans=max(a,b);
-
-    dp[i][j]=ans;
-
-  }
-  debug(dp);
-
- cout<<dp[0][n-1];
-
+  vector<vector<ll>>dp(n+1,vector<ll>(n+1,-1));
+  cout<<maxScore(v,0,n-1,dp);
 }
 
 int main() 
