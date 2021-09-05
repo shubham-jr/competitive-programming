@@ -11,3 +11,7 @@ initialize 2d vector vector<vector<int>>dp(x+1,vector<int>(n+1,-1));
 vector<vector<int> > *varVect;
  //this is the vector pointer that need to hold the other vectors
 https://www.onlinegdb.com/ to share or run code
+modular mniltiplicative inverse like multiplicative inverse[(a/b)%c] prop:: a*x=1 mod c
+don't use normal divison in case of modulo use above its multiplicative inverse
+XOR properties a^b=c then a^c=b also c^b=a
+a^0=a and a^a=0 
