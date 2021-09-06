@@ -15,4 +15,3 @@ modular mniltiplicative inverse like multiplicative inverse[(a/b)%c] prop:: a*x=
 don't use normal divison in case of modulo use above its multiplicative inverse
 XOR properties a^b=c then a^c=b also c^b=a
 a^0=a and a^a=0 
-harsh bhai
