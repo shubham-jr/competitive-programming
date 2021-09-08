@@ -11,6 +11,7 @@ using namespace std;
 #define popb pop_back
 #define mp make_pair
 #define rz resize
+#define typeof(i) decltype(i)::foo= 1;
 #define all(v) v.begin(), v.end()
 #define fo(x,y) for(int i=x;i<y;i++)
 #define fo1(x,y) for(int i=x;i<y;i++)
@@ -40,6 +41,7 @@ template<class T>void vprint(set<T>s1){cerr<<"[";for(T i:s1){vprint(i);cerr<<" "
 template<class T>void vprint(multiset<T>s1){cerr<<"[";for(T i:s1){vprint(i);cerr<<" ";}cerr<<"]";}
 template<class T,class P>void vprint(pair<T,P>p1){cerr<<"{";vprint(p1.ff);cerr<<",";vprint(p1.ss);cerr<<"}";}
 template<class T,class P>void vprint(map<T,P>m1){cerr<<"[";for(auto i:m1){vprint(i);cerr<<" ";}cerr<<"]";}
+template<class T,class P,class Q>void vprint(map<T,P,greater<Q>>m){cerr<<"[";for(auto i:m){vprint(i);cerr<<" ";}cerr<<"]";}
 template<class T>void vprint(vector<vector<T>>vec){for(int i=0;i<vec.size();i++){vprint(vec[i]);cerr<<endl;}}
 template<class T,class P>void vprint(vector<pair<T,P>>v){cerr<<"[";for(auto i:v)vprint(i);cerr<<"]";cerr<<endl;}
 template<class T,class P>void vprint(set<pair<T,P>>s){cerr<<"[";for(auto i:s)vprint(i);cerr<<"]";}
@@ -49,75 +51,53 @@ template<class T,class P>void vprint(unordered_map<T,P>m){cerr<<"[";for(auto i:m
 template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:graph){cerr<<"[";vprint(i.ff);cerr<<":";vprint(i.ss);cerr<<"]";}}
 template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 
-void binarySearch(int &low ,int &high,vector<int>&ans,vector<int>&v,int &tmp,int i)
+bool sortBySec(tuple<ll,ll,ll>&a,tuple<ll,ll,ll>&b)
 {
-    while(low<=high)
-      {
-
-        int mid=low+high>>1;
-
-        if(ans[mid]<v[i]) 
-          low=mid+1;
-
-        if(ans[mid]>v[i])
-          high=mid-1;
-
-        if(ans[mid]==v[i])
-          {tmp=1;break;}
-
-      }
+  return get<1>(a)<get<1>(b);
 }
-void maxLength(vector<int>&ans,vector<int>&v)
+
+ll binary_search(ll val,vector<ll>&endPoints)
 {
-  int n=v.size();
-
-  int low=0,high=0,tmp=0;
-
-  fo(1,n)
+  auto it=lower_bound(all(endPoints),val);
+  if(it==endPoints.begin())
+  return 0;
+  else
   {
-    tmp=0;
+    it--;
+    return 1+it-endPoints.begin();
+  }  
+}
 
-    low=0,high=ans.size()-1; 
-
-    if(v[i]>ans[high])
-    ans.pb(v[i]),high++;
-
-    if(v[i]<ans[high])
-    {
-      binarySearch(low,high,ans,v,tmp,i);
-      
-      if(low>n)
-        low=n-1;
-
-        if(high<0)
-          high=0;
-
-        if(!tmp)
-        ans[low]=v[i];
-
-    }
+ll maxCost(ll n,vector<tuple<ll,ll,ll>>&v,vector<ll>&endPoints,vector<ll>&dp)
+{
+  fo(2,n+1)
+  {
+    ll left=dp[i-1];
+    ll j=binary_search(get<0>(v[i-1]),endPoints);
+    ll right=get<2>(v[i-1])+dp[j];
+    dp[i]=max(left,right);
   }
+  return dp[n];
 }
 
 void solve()
 {
-  int n;
-
+  ll n;
   cin>>n;
-
-  vector<int>v(n);
-
+  vector<tuple<ll,ll,ll>>v(n);
   fo(0,n)
-  cin>>v[i];
-
-  vector<int>ans;
-
-  ans.pb(v[0]);
-
-  maxLength(ans,v);
-
-  cout<<ans.size();
-
+  {
+    ll s,e,cost;
+    cin>>s>>e>>cost;
+    v[i]={s,e,cost};
+  }
+  sort(all(v),sortBySec);
+  vector<ll>endPoints(n);
+  fo(0,n)
+  endPoints[i]=get<1>(v[i]);
+  vector<ll>dp(n+1,-1);
+  dp[0]=0;dp[1]=get<2>(v[0]);
+  cout<<maxCost(n,v,endPoints,dp);
 }
 
 int main() 

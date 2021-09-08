@@ -15,3 +15,15 @@ modular mniltiplicative inverse like multiplicative inverse[(a/b)%c] prop:: a*x=
 don't use normal divison in case of modulo use above its multiplicative inverse
 XOR properties a^b=c then a^c=b also c^b=a
 a^0=a and a^a=0 
+https://www.geeksforgeeks.org/passing-reference-to-a-pointer-in-c/
+void changeReferenceValue(int*& pp) reference to pointer
+to accessing global and local variable of same name use ::(scope resolution operator)
+how to find the type of any variable
+{
+  auto testVar = std::make_tuple(1, 1.0, "abc");
+  decltype(testVar)::foo= 1;
+}
+retuns error: 'foo' is not a member of 'std::tuple<int, double, const char*>'
+how to iterator through map map<int,int,greater<int>>::iterator it=m1.begin(); then it->first it->second
+if you don't know how to store the data you have then use your own data types using class or structure like to store the triplet in vcetors
+or storing triplets or more simply use tuple<int ,char,float>s;operations 1.get() 2.make_tuple ex get<0>(variable_name)

@@ -1,0 +1,3 @@
+you can use upper_bound() and lower_bound() to find the element just greater or equall or just lesser or equall 
+to the given value.its a shorthand for binary_search
+paramter lower_bound(container.begin(),container.end(),val) return an iterator
