@@ -1,3 +1,6 @@
 you can use upper_bound() and lower_bound() to find the element just greater or equall or just lesser or equall 
 to the given value.its a shorthand for binary_search
 paramter lower_bound(container.begin(),container.end(),val) return an iterator
+{it->ff,it->ss} it is the iteartor of map
+want to sort element if they are equall then on the basis of second and if not then on the basis of first tyhen use
+vector<pair<int,int>> using comparator  return a.ff!=b.ff?a.ff>b.ff:a.ss<b.ss;
