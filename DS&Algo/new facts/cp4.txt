@@ -4,3 +4,4 @@ paramter lower_bound(container.begin(),container.end(),val) return an iterator
 {it->ff,it->ss} it is the iteartor of map
 want to sort element if they are equall then on the basis of second and if not then on the basis of first tyhen use
 vector<pair<int,int>> using comparator  return a.ff!=b.ff?a.ff>b.ff:a.ss<b.ss;
+if the number is divisible by 2 then the digital sum(repeated sum) is always 9 else n%mod
