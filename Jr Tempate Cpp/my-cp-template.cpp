@@ -52,7 +52,7 @@ template<class T,class P>void vprint(map<T,vector<pair<T,P>>>graph){for(auto i:g
 template<class T,class P>void vprint(multimap<T,P>m){cerr<<"[";for(auto i:m){vprint(i);cerr<<" ";}cerr<<"]";}
 template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 template<class T>int gcd(T a,T b){if(a==0)return b;return gcd(b%a,a);}
-template<class T>bool checkInt(T b){b=abs(b);//for negative numbersint a=b;return b-a>0?0:1;}
+template<class T>bool checkInt(T b){b=abs(b);/*for negative numbers*/ int a=b;return b-a>0?0:1;}
 
 void solve()
 {
