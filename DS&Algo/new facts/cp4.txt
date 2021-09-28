@@ -5,3 +5,9 @@ paramter lower_bound(container.begin(),container.end(),val) return an iterator
 want to sort element if they are equall then on the basis of second and if not then on the basis of first tyhen use
 vector<pair<int,int>> using comparator  return a.ff!=b.ff?a.ff>b.ff:a.ss<b.ss;
 if the number is divisible by 2 then the digital sum(repeated sum) is always 9 else n%mod
+converting char to int char-'0' or char-48
+converting string to int use stringstream get(str) 
+for updating an iteatror use -------------
+std::next(iter, 2);          // returns a copy of iter incremented by 2
+std::next(std::begin(v), 2); // returns a copy of begin(v) incremented by 2
+std::prev(iter, 2);          // returns a copy of iter decremented by 2
