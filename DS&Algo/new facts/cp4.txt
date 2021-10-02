@@ -12,3 +12,5 @@ std::next(iter, 2);          // returns a copy of iter incremented by 2
 std::next(std::begin(v), 2); // returns a copy of begin(v) incremented by 2
 std::prev(iter, 2);          // returns a copy of iter decremented by 2  ll
 max no of factors any no have is logn
+ceil(3/2)=1 but ceil((float)3/2)=2
+how to find the nearest square power of any number https://www.geeksforgeeks.org/find-significant-set-bit-number/

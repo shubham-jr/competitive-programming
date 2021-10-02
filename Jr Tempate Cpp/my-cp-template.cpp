@@ -57,6 +57,7 @@ template<class T,class P>void vprint(multimap<T,P>m){cerr<<"[";for(auto i:m){vpr
 template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 template<class T>int gcd(T a,T b){if(a==0)return b;return gcd(b%a,a);}
 template<class T>bool checkInt(T b){b=abs(b);/*for negative numbers*/ int a=b;return b-a>0?0:1;}
+template<class T>T find_nearest_square_pow(T n,char pos){if(pos=='l'){T k=floor(log2(n));return 1<<k;}else{T k=ceil(log2(n));return 1<<k;}}
 
 void solve()
 {
