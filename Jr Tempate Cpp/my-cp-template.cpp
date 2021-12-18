@@ -1,15 +1,15 @@
 #pragma GCC optimize("Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #pragma GCC optimize("unroll-loops")
-#pragma GCC optimize "trapv"    
+#pragma GCC optimize "trapv"        
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+const int mod=1000000007;
 #define ff first
 #define ss second
 #define PI 3.141592653589793238462
 #define INF 1e18
-#define mod 1000000007
 #define nline "\n"
 #define pb push_back
 #define popb pop_back
@@ -58,6 +58,7 @@ template<class T>void swap(T *a,T *b){T tmp;tmp=*a;*a=*b;*b=tmp;}
 template<class T>int gcd(T a,T b){if(a==0)return b;return gcd(b%a,a);}
 template<class T>bool checkInt(T b){b=abs(b);/*for negative numbers*/ int a=b;return b-a>0?0:1;}
 template<class T>T find_nearest_square_pow(T n,char pos){if(pos=='l'){T k=floor(log2(n));return 1<<k;}else{T k=ceil(log2(n));return 1<<k;}}
+template<class T>T binaryExponentiation(T a,T b,T m){T ans=1;a%=m;while(b){if(b&1)ans=(ans*a)%m;a=(a*a)%m;b=b>>1;}return ans;}
 
 void solve()
 {
