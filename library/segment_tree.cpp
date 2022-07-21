@@ -22,7 +22,7 @@ int query(int index,int start,int end,int low,int high){
     }  
   }
   debug2(start,end);
-  if(start==end)             // if(start==low&&end==high) this is if we want to find an element say [3,3]
+  if(start==low&&end==high)            // if(start==low&&end==high) this is if we want to find an element say [3,3]
   return tree[index]; 
   
   if(start>high||end<low)
