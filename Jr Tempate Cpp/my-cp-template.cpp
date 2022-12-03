@@ -23,6 +23,7 @@ const int mod=1000000007;
 #define fo2(x,y) for(int j=x;j<y;j++)
 #define pii pair<int,int>
 #define tc int t;cin>>t;while(t--)
+#define watch() cerr<<"Time:"<<1000*((double)clock())/(double)CLOCKS_PER_SEC<<"ms\n"
 #ifndef ONLINE_JUDGE
 #define debug(x)cerr<<#x<<" ";vprint(x);cerr<<endl;
 #define debug2(x,y)cerr<<#x<<" ";vprint(x);cerr<<" ";cerr<<#y<<" ";vprint(y);cerr<<endl;
@@ -76,5 +77,9 @@ int main()
   #endif
   fastio();  
   solve();
+  watch();
   return 0;
 }
+
+// Want to use this template for CP ?
+// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"
