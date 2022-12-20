@@ -64,6 +64,11 @@ template<class T>bool checkInt(T b){b=abs(b);/*for negative numbers*/ int a=b;re
 template<class T>T find_nearest_square_pow(T n,char pos){if(pos=='l'){T k=floor(log2(n));return 1<<k;}else{T k=ceil(log2(n));return 1<<k;}}
 template<class T>T binaryExponentiation(T a,T b,T m){T ans=1;a%=m;while(b){if(b&1)ans=(ans*a)%m;a=(a*a)%m;b=b>>1;}return ans;}
 template<class T>void printMatrix(vector<vector<T>>&matrix){fo1(0,matrix.size()){fo2(0,matrix[0].size())cout<<matrix[i][j]<<" ";nline;}}
+template<class T>ostream& operator<<(ostream&os,vector<T>&v){fo(0,v.size())os<<v[i]<<" ";nline;return os;}
+template<class T>istream& operator>>(istream&is,vector<T>&v){fo(0,v.size())is>>v[i];return is;}
+template<class T>istream& operator>>(istream&is,vector<vector<T>>&v){vector<int>tmp(v[0].size());fo(0,v.size()){is>>tmp;v[i] = tmp;}return is;}
+template<class T>ostream& operator>>(ostream&os,vector<vector<T>>&v){vector<int>tmp(v[0].size());fo(0,v.size())os<<v[i];return os;}
+
 
 void solve()
 {
@@ -77,9 +82,5 @@ int main()
   #endif
   fastio();  
   solve();
-  watch();
   return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"
