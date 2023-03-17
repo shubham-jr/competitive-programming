@@ -65,14 +65,48 @@ template<class T>T binaryExponentiation(T a, T b, T m) {T ans = 1; a %= m; while
 template<class T>string printBinary(T x) {return bitset<32>(x).to_string();}
 template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os << v[i] << " "; nline; return os;}
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
-template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
-template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
-
+template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
+template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
+ 
+// using the built in method in cpp stl next_permutation()
+ 
+int rcs(string &str, vector<string>&v) {
+  int count = 0;
+  do {
+    count++;
+    v.pb(str);
+  } while (next_permutation(all(str)));
+  return count;
+}
+ 
+// using recursion
+ 
+void rcs(string &str, int low, int high, set<string>&v) {
+ 
+  if (low == high) {
+    debug(str);
+    v.insert(str);
+    return;
+  }
+ 
+  fo(low, high + 1) {
+    swap(str[low], str[i]);
+    rcs(str, low + 1, high, v);
+    swap(str[low], str[i]);
+  }
+}
+ 
 void solve()
 {
-
+  string str, tmp;
+  set<string>v;
+  cin >> str;
+  sort(all(str));
+  rcs(str, 0, str.size() - 1, v);
+  cout << v.size() << endl;
+  for (string i : v)cout << i << endl;
 }
-
+ 
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -82,6 +116,3 @@ int main()
   solve();
   return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"

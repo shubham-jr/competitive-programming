@@ -67,12 +67,39 @@ template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
 template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
 template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
-
+ 
+ll ans = 0, N = 8;
+ 
+void rcs(vector<vector<char>>&v, vector<ll>& d1, vector<ll>& d2, vector<ll>& row, vector<ll>& col, ll j, ll queen) {
+ 
+  if (queen == 0) {
+    ans++;
+    return;
+  }
+  fo(0, v.size()) {
+    if (v[i][j] != '*' && !d1[i + j] && !d2[i - j + 7] && !row[i] && !col[j]) {
+      d1[i + j] = 1;
+      d2[i - j + 7] = 1;
+      row[i] = 1;
+      col[j] = 1;
+      rcs(v, d1, d2, row, col, j + 1, queen - 1);
+      d1[i + j] = 0;
+      d2[i - j + 7] = 0;
+      row[i] = 0;
+      col[j] = 0;
+    }
+  }
+}
+ 
 void solve()
 {
-
+  vector<vector<char>>v(N, vector<char>(N));
+  cin >> v;
+  vector<ll>d1(30), d2(30), row(8), col(8);
+  rcs(v, d1, d2, row, col, 0, N);
+  cout << ans << endl;
 }
-
+ 
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -82,6 +109,3 @@ int main()
   solve();
   return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"

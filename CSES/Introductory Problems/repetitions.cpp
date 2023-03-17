@@ -65,12 +65,26 @@ template<class T>T binaryExponentiation(T a, T b, T m) {T ans = 1; a %= m; while
 template<class T>string printBinary(T x) {return bitset<32>(x).to_string();}
 template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os << v[i] << " "; nline; return os;}
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
-template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
-template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
+template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
+template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
 
 void solve()
 {
+  string str;
+  cin >> str;
+  map<char, int>m;
+  int tmp = 1, ans = 1;
+  char ch = str[0];
+  fo(1, str.size()) {
+    if (str[i] != ch) {
+      tmp = 1;
+      ch = str[i];
+    } else
+      tmp++;
+    ans = max(ans, tmp);
+  }
 
+  cout << ans << endl;
 }
 
 int main()

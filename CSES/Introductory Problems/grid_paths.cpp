@@ -1,7 +1,7 @@
 #pragma GCC optimize("Ofast")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
 #pragma GCC optimize("unroll-loops")
-#pragma GCC optimize "trapv"
+// #pragma GCC optimize "trapv"
 #include<bits/stdc++.h>
 using namespace std;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
@@ -67,21 +67,89 @@ template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
 template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
 template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
-
+ 
+string path;
+int n = 7;
+vector<vector<int>>visited(n, vector<int>(n));
+ 
+ 
+// see if the point is in the grid or outside the grid
+bool isValid(int i) {
+	return (i >= 0 && i < n);
+}
+ 
+void move(int row, int col, int &ans, int steps) {
+ 
+	// if (row == 6 && col == 0) {
+	// 	if (steps == 48)ans++;
+	// 	return;
+	// }
+ 
+	// if ((row == 0 || row == n - 1 || col == 0 || col == n - 1 || (isValid(row + 1) && isValid(row - 1) && visited[row + 1][col] && visited[row - 1][col])) && isValid(col + 1) && isValid(col - 1) && !visited[row][col - 1] && !visited[row][col + 1])
+	// 	return;
+ 
+	// if ((row == 0 || row == n - 1 || col == 0 || col == n - 1 || (isValid(col + 1) && isValid(col - 1) && visited[row][col + 1] && visited[row][col - 1])) && isValid(row + 1) && isValid(row - 1) && !visited[row - 1][col] && !visited[row + 1][col] )
+	// 	return;
+ 
+	if (row == 6 && col == 0) {
+		if (steps == 48)ans++;
+		return;
+	}
+ 
+	if ((row == 0 || row == n - 1 || col == 0 || col == n - 1 || (isValid(row + 1) && isValid(row - 1) && visited[row + 1][col] && visited[row - 1][col] )) && isValid(col + 1) && isValid(col - 1) && !visited[row][col - 1] && !visited[row][col + 1])
+		return;
+ 
+	if ((row == 0 || row == n - 1 || col == 0 || col == n - 1 || (isValid(col + 1) && isValid(col - 1) && visited[row][col + 1] && visited[row][col - 1] )) && isValid(row + 1) && isValid(row - 1) && !visited[row - 1][col] && !visited[row + 1][col])
+		return;
+ 
+	visited[row][col] = 1;
+ 
+	if (path[steps] != '?') {
+		if (path[steps] == 'U' && isValid(row - 1) && !visited[row - 1][col])
+			move(row - 1, col, ans, steps + 1);
+ 
+		else if (path[steps] == 'R' && isValid(col + 1) && !visited[row ][col + 1])
+			move(row , col + 1, ans, steps + 1);
+ 
+		else if (path[steps] == 'D' && isValid(row + 1) && !visited[row + 1][col])
+			move(row + 1, col, ans, steps + 1);
+ 
+		else if (path[steps] == 'L' && isValid(col - 1) && !visited[row ][col - 1])
+			move(row , col - 1, ans, steps + 1);
+ 
+	} else {
+		if (isValid(col - 1) && !visited[row][col - 1])
+			move(row, col - 1, ans, steps + 1);
+ 
+		if (isValid(col + 1) && !visited[row][col + 1])
+			move(row, col + 1, ans, steps + 1);
+ 
+		if (isValid(row - 1) && !visited[row - 1][col])
+			move(row - 1, col, ans, steps + 1);
+ 
+		if (isValid(row + 1) && !visited[row + 1][col ])
+			move(row + 1, col, ans, steps + 1);
+	}
+ 
+	visited[row][col] = 0;
+ 
+}
+ 
+ 
 void solve()
 {
-
+	int ans = 0;
+	cin >> path;
+	move(0, 0, ans, 0);
+	cout << ans;
 }
-
+ 
 int main()
 {
 #ifndef ONLINE_JUDGE
-  freopen("error.txt", "w", stderr);
+	freopen("error.txt", "w", stderr);
 #endif
-  fastio();
-  solve();
-  return 0;
+	fastio();
+	solve();
+	return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"

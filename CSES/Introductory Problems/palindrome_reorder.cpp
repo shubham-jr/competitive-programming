@@ -65,14 +65,60 @@ template<class T>T binaryExponentiation(T a, T b, T m) {T ans = 1; a %= m; while
 template<class T>string printBinary(T x) {return bitset<32>(x).to_string();}
 template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os << v[i] << " "; nline; return os;}
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
-template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
-template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
-
+template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
+template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
+ 
 void solve()
 {
-
+  char ch;
+  int size = 0;
+  map<char, int>m;
+  vector<char>v;
+  while (cin >> ch)m[ch]++, size++;
+ 
+  debug(m);
+ 
+  int count = 0;
+  for (auto i : m)
+    if ((i.ss & 1))count++;
+ 
+  if (count >= 2) {
+    debug(count)
+    cout << "NO SOLUTION" << endl;
+    return;
+  }
+ 
+  string str;
+ 
+  // for even
+  for (auto q : m) {
+    if (!(q.ss & 1)) {
+      fo(0, q.ss / 2)str.pb(q.ff);
+    }
+  }
+ 
+  // for odd, push them all
+  for (auto q : m) {
+    if ((q.ss & 1)) {
+      fo(0, q.ss)str.pb(q.ff);
+    }
+  }
+ 
+  string tmp;
+ 
+  // rest even half
+  for (auto q : m) {
+    if (!(q.ss & 1)) {
+      fo(0, q.ss / 2)tmp.pb(q.ff);
+    }
+  }
+ 
+  reverse(tmp.begin(), tmp.end());
+ 
+  cout << str << tmp << endl;
+ 
 }
-
+ 
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -82,6 +128,3 @@ int main()
   solve();
   return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"

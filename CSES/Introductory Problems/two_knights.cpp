@@ -65,14 +65,22 @@ template<class T>T binaryExponentiation(T a, T b, T m) {T ans = 1; a %= m; while
 template<class T>string printBinary(T x) {return bitset<32>(x).to_string();}
 template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os << v[i] << " "; nline; return os;}
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
-template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
-template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
-
+template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
+template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
+ 
 void solve()
 {
-
+  ll n;
+  cin >> n;
+  for (ll i = 1ll; i <= n; i++)
+  {
+    ll a = (i * i * i * i - i * i) / 2ll;
+    ll b  = 4ll * (i - 1ll) * (i - 2ll);
+    cout << a - b;
+    nline;
+  }
 }
-
+ 
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -82,6 +90,3 @@ int main()
   solve();
   return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"

@@ -65,14 +65,47 @@ template<class T>T binaryExponentiation(T a, T b, T m) {T ans = 1; a %= m; while
 template<class T>string printBinary(T x) {return bitset<32>(x).to_string();}
 template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os << v[i] << " "; nline; return os;}
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
-template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
-template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
-
+template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
+template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<int>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
+ 
 void solve()
 {
-
+  ll n;
+  cin >> n;
+  vector<ll>set1, set2;
+  if (!(n % 4)) {
+    ll cnt  = 0;
+    fo(1, n + 1) {
+      cnt++;
+      if (cnt == 1ll)set1.pb(i);
+      else if (cnt == 4ll) {set1.pb(i); cnt = 0;}
+      else set2.pb(i);
+    }
+  } else if (n % 4 == 3) {
+    set1.insert(set1.end(), {1ll, 2ll}); set2.pb(3ll);
+    ll cnt  = 0;
+    fo(4, n + 1) {
+      cnt++;
+      if (cnt == 1ll)set1.pb(i);
+      else if (cnt == 4ll) {set1.pb(i); cnt = 0;}
+      else set2.pb(i);
+    }
+  } else {
+    cout << "NO" << endl;
+    return;
+  }
+  debug(set1); debug(set2);
+ 
+  sort(all(set1));
+  sort(all(set2));
+ 
+  cout << "YES" << endl;
+  cout << set1.size() << endl;
+  cout << set1;
+  cout << set2.size() << endl;
+  cout << set2;
 }
-
+ 
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -82,6 +115,3 @@ int main()
   solve();
   return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"

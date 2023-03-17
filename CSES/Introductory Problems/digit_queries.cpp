@@ -67,21 +67,62 @@ template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
 template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
 template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
-
+ 
+ll findDigit(ll number, ll rem) {
+  while (rem--) {
+    number /= 10;
+  }
+  return number % 10;
+}
+ 
+ll getNumber(ll digits) {
+  ll ans = 1;
+  while (digits--) {
+    ans *= 10;
+  }
+  return ans - 1;
+ 
+}
+ 
+vector<ll> findllerval(ll low, ll high, ll n) {
+  ll digits = 1, tmp = 9;
+  while (1)
+  {
+    if (n <= high && n >= low) return vector<ll> {digits, low, high};
+    digits++;
+    low = high ;
+    high = (tmp * 10 * digits) + low;
+    tmp *= 10;
+  }
+ 
+  return vector<ll> {digits, low, high};
+}
+ 
 void solve()
 {
-
+  ll n;
+  cin >> n;
+  ll low = 0, high = 9;
+  auto i = findllerval(low, high, n);
+  i.pb(getNumber(i[0]));
+ 
+  ll distance = (i[2] - n) / i[0];
+  ll rem = (i[2] - n) % i[0];
+  ll actual_number = i[3] - distance;
+ 
+  debug2(distance, rem); debug(actual_number);
+ 
+  cout << findDigit(actual_number, rem) << endl;
+ 
+  debug(i);
 }
-
+ 
 int main()
 {
 #ifndef ONLINE_JUDGE
   freopen("error.txt", "w", stderr);
 #endif
   fastio();
-  solve();
+  tc solve();
   return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"
