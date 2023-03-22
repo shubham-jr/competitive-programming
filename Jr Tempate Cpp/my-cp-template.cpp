@@ -67,6 +67,8 @@ template<class T>ostream& operator<<(ostream&os, vector<T>&v) {fo(0, v.size())os
 template<class T>istream& operator>>(istream&is, vector<T>&v) {fo(0, v.size())is >> v[i]; return is;}
 template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size()) {is >> tmp; v[i] = tmp;} return is;}
 template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
+template<class T, class P>istream& operator>>(istream&is, vector<pair<T, P>>&v) {fo(0, v.size()) {T x; P y; is >> x >> y; v[i] = {x, y};} return is;}
+template<class T, class P>ostream& operator<<(ostream&os, vector<pair<T, P>>&v) {fo(0, v.size())os << v[i].ff << " " << v[i].ss << endl; nline; return os;}
 
 void solve()
 {
