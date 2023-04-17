@@ -3,19 +3,24 @@
 #pragma GCC optimize("unroll-loops")
 #pragma GCC optimize "trapv"
 #include<bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
+using namespace __gnu_pbds;
 #define fastio() ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 const int mod = 1000000007;
 #define ff first
 #define ss second
 #define PI 3.141592653589793238462
-#define INF 1e18
 #define nline cout<<endl
 #define pb push_back
 #define popb pop_back
 #define mp make_pair
 #define rz resize
+#define yep cout<<"yes"<<endl
+#define nope cout<<"no"<<endl
 #define check debug("here")
+#define INF (long long)2e+18
 #define typeof(i) decltype(i)::foo= 1;
 #define all(v) v.begin(), v.end()
 #define fo(x,y) for(int i=x;i<y;i++)
@@ -23,6 +28,7 @@ const int mod = 1000000007;
 #define fo2(x,y) for(int j=x;j<y;j++)
 #define pii pair<int,int>
 #define tc int t;cin>>t;while(t--)
+#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
 #define watch() cerr<<"Time:"<<1000*((double)clock())/(double)CLOCKS_PER_SEC<<"ms\n"
 #ifndef ONLINE_JUDGE
 #define debug(x)cerr<<#x<<" ";vprint(x);cerr<<endl;
@@ -78,11 +84,11 @@ void solve()
 int main()
 {
 #ifndef ONLINE_JUDGE
-  freopen("error.txt", "w", stderr);
+	freopen("error.txt", "w", stderr);
 #endif
-  fastio();
-  solve();
-  return 0;
+	fastio();
+	solve();
+	return 0;
 }
 
 // Want to use this template for CP ?
