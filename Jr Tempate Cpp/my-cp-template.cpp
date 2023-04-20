@@ -20,15 +20,16 @@ const int mod = 1000000007;
 #define yep cout<<"yes"<<endl
 #define nope cout<<"no"<<endl
 #define check debug("here")
+#define VAR_NAME(x) #x
 #define INF (long long)2e+18
 #define typeof(i) decltype(i)::foo= 1;
 #define all(v) v.begin(), v.end()
 #define fo(x,y) for(int i=x;i<y;i++)
+#define fo_r(x,y) for(int i=x;i>=y;i--)
 #define fo1(x,y) for(int i=x;i<y;i++)
 #define fo2(x,y) for(int j=x;j<y;j++)
 #define pii pair<int,int>
 #define tc int t;cin>>t;while(t--)
-#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
 #define watch() cerr<<"Time:"<<1000*((double)clock())/(double)CLOCKS_PER_SEC<<"ms\n"
 #ifndef ONLINE_JUDGE
 #define debug(x)cerr<<#x<<" ";vprint(x);cerr<<endl;
@@ -75,12 +76,14 @@ template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>
 template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
 template<class T, class P>istream& operator>>(istream&is, vector<pair<T, P>>&v) {fo(0, v.size()) {T x; P y; is >> x >> y; v[i] = {x, y};} return is;}
 template<class T, class P>ostream& operator<<(ostream&os, vector<pair<T, P>>&v) {fo(0, v.size())os << v[i].ff << " " << v[i].ss << endl; nline; return os;}
+template<typename T>void debugAll(const char* name, T arg) {cerr << name << " "; vprint(arg); cerr << endl;}
+template<class T>using ordered_set  = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+template<typename T, typename... Args>void debugAll(const char* name, T arg, Args... args) {cerr << name << " "; vprint(arg); cerr << endl; debugAll(args...);}
 
 void solve()
 {
 
 }
-
 int main()
 {
 #ifndef ONLINE_JUDGE
