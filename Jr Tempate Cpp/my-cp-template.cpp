@@ -31,6 +31,7 @@ const int mod = 1000000007;
 #define pii pair<int,int>
 #define tc int t;cin>>t;while(t--)
 #define watch() cerr<<"Time:"<<1000*((double)clock())/(double)CLOCKS_PER_SEC<<"ms\n"
+#define DEBUG_ALL(...) callBoth(#__VA_ARGS__, __VA_ARGS__)
 #ifndef ONLINE_JUDGE
 #define debug(x)cerr<<#x<<" ";vprint(x);cerr<<endl;
 #define debug2(x,y)cerr<<#x<<" ";vprint(x);cerr<<" ";cerr<<#y<<" ";vprint(y);cerr<<endl;
@@ -49,6 +50,7 @@ void vprint(double a) {cerr << a;}
 void vprint(bool a) {cerr << a;}
 void vprint(string a) {cerr << a;}
 void vprint(long double a) {cerr << a;}
+template <class K, class V>using hash_table = __gnu_pbds::gp_hash_table<K, V>;
 template<class T>void vprint(vector<T> v1) {cerr << "["; for (T i : v1) {vprint(i); cerr << " ";} cerr << "]";}
 template<class T>void vprint(set<T>s1) {cerr << "["; for (T i : s1) {vprint(i); cerr << " ";} cerr << "]";}
 template<class T>void vprint(multiset<T>s1) {cerr << "["; for (T i : s1) {vprint(i); cerr << " ";} cerr << "]";}
@@ -66,7 +68,7 @@ template<class T, class P>void vprint(multimap<T, P>m) {cerr << "["; for (auto i
 template<class T>void vprint(queue<T>q) {cerr << "["; int q_size = q.size(); for (int i = 0; i < q_size; i++) {vprint(q.front()); q.pop(); cerr << " ";} cerr << "]";}
 template<class T, class P>void vprint(queue<pair<T, P>>q) {cerr << "["; int q_size = q.size(); for (int i = 0; i < q_size; i++) {vprint(q.front()); q.pop(); cerr << " ";} cerr << "]";}
 template<class T>void swap(T *a, T *b) {T tmp; tmp = *a; *a = *b; *b = tmp;}
-template<class T>bool checkInt(T b) {b = abs(b);/*for negative numbers*/ int a = b; return b - a > 0 ? 0 : 1;}
+template<class T>bool isInt(T b) {b = abs(b);/*for negative numbers*/ int a = b; return b - a > 0 ? 0 : 1;}
 template<class T>T find_nearest_square_pow(T n, char pos) {if (pos == 'l') {T k = floor(log2(n)); return 1 << k;} else {T k = ceil(log2(n)); return 1 << k;}}
 template<class T>T binaryExponentiation(T a, T b, T m) {T ans = 1; a %= m; while (b) {if (b & 1)ans = (ans * a) % m; a = (a * a) % m; b = b >> 1;} return ans;}
 template<class T>string printBinary(T x) {return bitset<32>(x).to_string();}
@@ -76,23 +78,25 @@ template<class T>istream& operator>>(istream&is, vector<vector<T>>&v) {vector<T>
 template<class T>ostream& operator>>(ostream&os, vector<vector<T>>&v) {vector<T>tmp(v[0].size()); fo(0, v.size())os << v[i]; return os;}
 template<class T, class P>istream& operator>>(istream&is, vector<pair<T, P>>&v) {fo(0, v.size()) {T x; P y; is >> x >> y; v[i] = {x, y};} return is;}
 template<class T, class P>ostream& operator<<(ostream&os, vector<pair<T, P>>&v) {fo(0, v.size())os << v[i].ff << " " << v[i].ss << endl; nline; return os;}
-template<typename T>void debugAll(const char* name, T arg) {cerr << name << " "; vprint(arg); cerr << endl;}
 template<class T>using ordered_set  = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
-template<typename T, typename... Args>void debugAll(const char* name, T arg, Args... args) {cerr << name << " "; vprint(arg); cerr << endl; debugAll(args...);}
+queue<string> getWords(string str) {istringstream iss(str); string word; queue<string> words; while (getline(iss, word, ',')) {words.push(word);} return words;}
+template<typename T>void debugAll(queue<string>&q, T arg) {cerr << (q.front()) << " " << arg << endl; q.pop();}
+template<typename T, typename... Args>void debugAll( queue<string>&q, T arg, Args... args) {cerr << (q.front()) << " " << arg << endl; q.pop(); debugAll(q, forward<Args>(args)...);}
+template<typename... Args>void callBoth(const char* str, Args... args) {string args_str = str; queue<string> varNames = getWords(str); debugAll(varNames, forward<Args>(args)...);}
+void changeCase(std::string &str, char indicator) {auto caseFunc = (indicator == 'l') ? [](char c) { return std::tolower(c); }: [](char c) { return std::toupper(c); }; transform(str.begin(), str.end(), str.begin(), caseFunc);}
+bool isPrime(ll n) {if (n == 1ll)return 0; if (n == 2ll || n == 3ll)return 1; if (n % 2ll == 0ll || n % 3ll == 0ll)return 0; for (ll i = 5ll; i * i <= n; i += 6ll) {if (i % n == 0ll || (i + 2ll) % n == 0ll)return 0;} return 1;}
 
 void solve()
 {
-
+    
 }
+
 int main()
 {
 #ifndef ONLINE_JUDGE
-	freopen("error.txt", "w", stderr);
+    freopen("error.txt", "w", stderr);
 #endif
-	fastio();
-	solve();
-	return 0;
+    fastio();
+    tc solve();
+    return 0;
 }
-
-// Want to use this template for CP ?
-// Check it out "https://github.com/shubham-jr/competitive-programming/blob/master/Jr%20Tempate%20Cpp/my-cp-template.cpp"
